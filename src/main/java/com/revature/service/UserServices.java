@@ -5,13 +5,13 @@ import com.google.protobuf.ServiceException;
 import com.revature.dao.UserDAO;
 import com.revature.dao.UserDAOImp;
 import com.revature.exception.DBException;
+import com.revature.exception.ValidatorException;
 import com.revature.model.User;
 import com.revature.validator.UserValidator;
 
-import sun.security.validator.ValidatorException;
 
 public class UserServices {
-	UserDAOImp udao=new UserDAO();
+	UserDAO udao=new UserDAOImp();
 	
 public void register(User user) throws Exception
 {
@@ -38,8 +38,12 @@ public User login(String phone_number,String password) throws Exception
 	
      try {
     	 user=udao.login(phone_number,password);
+    	 if (user== null) {
+    		 throw new Exception("Invalid Login");
+    	 }
 	} catch (DBException e) {
 		e.printStackTrace();
+		throw new Exception(e);
 	}
 	return user ;
 	

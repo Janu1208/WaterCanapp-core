@@ -10,12 +10,12 @@ import com.revature.model.Order;
 
 public class OrderService {
 	public void orderCan( Order order) {
-		StockDAOImp sdao =new StockDAO();
+		StockDAO sdao =new StockDAOImp();
 		int availableStock = sdao.findavaiability();
 		System.out.println("Available:" + availableStock + ",orderCan:" + order.getOrderCans());
 		int totalCanAfterOrder=0;
 		if (order.getOrderCans() <= availableStock) {
-			OrderDAOImp odao=new OrderDAO();
+			OrderDAO odao=new OrderDAOImp();
 			odao.addOrder(order);
 			totalCanAfterOrder=availableStock - order.getOrderCans();
 			try {

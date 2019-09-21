@@ -13,22 +13,29 @@ import com.revature.model.Admin;
 import com.revature.model.Stock;
 
 public class AdminServices {
-	AdminDAOImp adao=new AdminDAO();
+	AdminDAO adao=new AdminDAOImp();
 
 	public Admin login(String name,String password) throws Exception
 	{
 		Admin admin=null;
 	     try {
 	    	 admin=adao.login(name,password);
+	    	 if(admin==null)
+	    	 {
+	    		 throw new Exception("Invalid Login");
+
+	    	 }
 		} catch (DBException e) {
 			e.printStackTrace();
+			throw new Exception(e);
+
 		}
 		return admin;
 		
 	}
 	public List<Stock> stockView() throws Exception {
 
-		StockDAOImp dao = new StockDAO();
+		StockDAO dao = new StockDAOImp();
 		List<Stock> list = null;
 		try {
 			list = dao.viewStock();
@@ -43,13 +50,12 @@ public class AdminServices {
 	public void setAvailableCans(int addCans) 
 	{
 		int update;
-	    //Stock stock=new Stock();
-		StockDAOImp dao = new StockDAO();
+		StockDAO dao = new StockDAOImp();
         update = dao.findavaiability();
-   // int availableCans=stock.getCans_avail();
     int updateCans=addCans+update;
    try {
 	dao.updateStock(updateCans);
+	
 } catch (SQLException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();

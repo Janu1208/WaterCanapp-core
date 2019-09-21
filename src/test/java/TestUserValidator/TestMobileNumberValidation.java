@@ -11,7 +11,7 @@ public class TestMobileNumberValidation {
 
 	@Test
 	public void test() {
-		String phone_number="7550122996";
+		String phone_number="755012299698";
 		try {
 			UserValidator.validPhone_number(phone_number);
 		} catch (Exception e) {
