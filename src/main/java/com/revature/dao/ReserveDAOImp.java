@@ -5,20 +5,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.revature.model.Reserve;
 import com.revature.model.User;
 import com.revature.util.ConnectionUtil;
 
 public class ReserveDAOImp implements ReserveDAO{
 	
-  public void addReserveCans(User user,int reserve_cans)
+  public void addReserveCans(Reserve reserve)
   {
 	  Connection con = ConnectionUtil.getConnection();
 		String sql="insert into reserve(user_id,reserve_cans,status) values(?,?,?)";
 		PreparedStatement pst = null;
 		try {
 			pst = con.prepareStatement(sql);
-			pst.setInt(1, user.getId());
-			pst.setInt(2,reserve_cans);
+			pst.setInt(1, reserve.getUserId());
+			pst.setInt(2,reserve.getReserveCans());
 			pst.setString(3,"Reserved");
 			pst.executeUpdate();
 		} catch (SQLException e) {
