@@ -11,10 +11,19 @@ import com.revature.dao.StockDAOImp;
 import com.revature.exception.DBException;
 import com.revature.model.Admin;
 import com.revature.model.Stock;
+import com.revature.util.ErrorConstants;
 
 public class AdminServices {
 	AdminDAO adao=new AdminDAOImp();
-
+/**
+ * Enter registered name and password
+ * values should not be null
+ * @param name
+ * @param password
+ * @return
+ * if u try to login with name and password that is not registered you will get invalid login
+ * @throws Exception
+ */
 	public Admin login(String name,String password) throws Exception
 	{
 		Admin admin=null;
@@ -22,7 +31,7 @@ public class AdminServices {
 	    	 admin=adao.login(name,password);
 	    	 if(admin==null)
 	    	 {
-	    		 throw new Exception("Invalid Login");
+	    		 throw new Exception(ErrorConstants.Login);
 
 	    	 }
 		} catch (DBException e) {
@@ -33,6 +42,11 @@ public class AdminServices {
 		return admin;
 		
 	}
+	/**
+	 * to show the updated stock
+	 * @return
+	 * @throws Exception
+	 */
 	public List<Stock> stockView() throws Exception {
 
 		StockDAO dao = new StockDAOImp();
@@ -44,9 +58,14 @@ public class AdminServices {
 			e.printStackTrace();
 		}
 
-		System.out.println();
 		return list;
 	}
+	/**
+	 * addCans should only be in integer value
+	 * value should not be null
+	 * value should be greater than zero
+	 * @param addCans
+	 */
 	public void setAvailableCans(int addCans) 
 	{
 		int update;
@@ -57,7 +76,6 @@ public class AdminServices {
 	dao.updateStock(updateCans);
 	
 } catch (SQLException e) {
-	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
 		

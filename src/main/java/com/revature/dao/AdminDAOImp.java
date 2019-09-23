@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 
 import com.revature.model.Admin;
 import com.revature.util.ConnectionUtil;
+import com.revature.util.ErrorConstants;
 public class AdminDAOImp implements AdminDAO {
 	 public Admin login(String name, String password) throws Exception  {
 			Connection con = null;
@@ -30,7 +31,7 @@ public class AdminDAOImp implements AdminDAO {
 			}
 			catch(Exception e) {
 				e.printStackTrace();
-				throw new Exception("Unable to login",e);
+				throw new Exception(ErrorConstants.dblogin,e);
 			}
 			
 			return admin;

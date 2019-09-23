@@ -7,12 +7,17 @@ import com.revature.dao.UserDAOImp;
 import com.revature.exception.DBException;
 import com.revature.exception.ValidatorException;
 import com.revature.model.User;
+import com.revature.util.ErrorConstants;
 import com.revature.validator.UserValidator;
 
 
 public class UserServices {
 	UserDAO udao=new UserDAOImp();
-	
+/**
+ * 
+ * @param user
+ * @throws Exception
+ */
 public void register(User user) throws Exception
 {
 	try {
@@ -39,7 +44,7 @@ public User login(String phone_number,String password) throws Exception
      try {
     	 user=udao.login(phone_number,password);
     	 if (user== null) {
-    		 throw new Exception("Invalid Login");
+    		 throw new Exception(ErrorConstants.Login);
     	 }
 	} catch (DBException e) {
 		e.printStackTrace();

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import com.revature.model.Order;
 import com.revature.model.User;
 import com.revature.util.ConnectionUtil;
+import com.revature.util.ErrorConstants;
 
 public class OrderDAOImp implements OrderDAO
 {
@@ -23,7 +24,7 @@ public class OrderDAOImp implements OrderDAO
 		pst.executeUpdate();
 	} catch (SQLException e) {
 		e.printStackTrace();
-		throw new RuntimeException("Unable to order");
+		throw new RuntimeException(ErrorConstants.orderCans);
 	}
 	finally {
 		ConnectionUtil.close(con, pst);
@@ -44,7 +45,7 @@ public void addReserveOrder(User user,int order_cans) throws Exception {
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new Exception("Unable to order Reserved Cans",e);
+			throw new Exception(ErrorConstants.orderReservedCans,e);
 		}
 		finally {
 			ConnectionUtil.close(con, pst);
