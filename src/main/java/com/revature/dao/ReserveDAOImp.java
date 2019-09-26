@@ -11,7 +11,7 @@ import com.revature.util.ConnectionUtil;
 
 public class ReserveDAOImp implements ReserveDAO{
 	
-  public void addReserveCans(Reserve reserve)
+  public void addReserveCans(Reserve reserve) throws SQLException
   {
 	  Connection con = ConnectionUtil.getConnection();
 		String sql="insert into reserve(user_id,reserve_cans,status) values(?,?,?)";
@@ -31,7 +31,7 @@ public class ReserveDAOImp implements ReserveDAO{
 		}
   }
   
-	public void updateReserveCans(User user,int reserve_cans)
+	public void updateReserveCans(User user,int reserve_cans) throws SQLException
 	{
 		Connection con = ConnectionUtil.getConnection();
 		String sql="update reserve set reserve_cans=? where user_id=?";
@@ -51,7 +51,7 @@ public class ReserveDAOImp implements ReserveDAO{
 		
 	}
 	
-	public User selectReserve(int reserve_id)
+	public User selectReserve(int reserve_id) throws SQLException
 	{
 		Connection con = ConnectionUtil.getConnection();
         String sql="select *from reserve  where reserve_id=? and status='Reserved'";
@@ -65,8 +65,8 @@ public class ReserveDAOImp implements ReserveDAO{
 			if(rs.next()) {
 			    user = new User();
 				user.setId(rs.getInt("user_id"));
-				user.setReserve_id(rs.getInt("reserve_id"));
-				user.setCans_avail(rs.getInt("reserve_cans"));
+				user.setReserveId(rs.getInt("reserve_id"));
+				user.setCansAvail(rs.getInt("reserve_cans"));
 				user.setStatus(rs.getString("status"));
 				
 			}
@@ -80,7 +80,7 @@ public class ReserveDAOImp implements ReserveDAO{
 		return user;
 	}
 	
-   public void updateStatus(User user,int reserve_cans)
+   public void updateStatus(User user,int reserve_cans) throws SQLException
    {
 	   Connection con =null;
 	    PreparedStatement pst = null;
@@ -89,7 +89,7 @@ public class ReserveDAOImp implements ReserveDAO{
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setInt(1,reserve_cans);
-			pst.setInt(2,User.getReserve_id());
+			pst.setInt(2,User.getReserveId());
 			
 			pst.executeUpdate();
 		} catch (SQLException e) {
@@ -102,7 +102,7 @@ public class ReserveDAOImp implements ReserveDAO{
 		}
 	}
    
-   public User findById(int id) {
+   public User findById(int id) throws SQLException {
 		
 		Connection con =null;
 		PreparedStatement pst = null;
@@ -116,10 +116,10 @@ public class ReserveDAOImp implements ReserveDAO{
 		
 			if(rs.next()) {
 			    user = new User();
-				user.setReserve_id(rs.getInt("reserve_id"));
+				user.setReserveId(rs.getInt("reserve_id"));
 				user.setName(rs.getString("User_name"));
 				user.setId(rs.getInt("user_id"));
-				user.setCans_avail(rs.getInt("reserve_cans"));
+				user.setCansAvail(rs.getInt("reserve_cans"));
 			
 				
 			}

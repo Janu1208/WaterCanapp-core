@@ -1,8 +1,8 @@
 package com.revature.validator;
 
+import com.revature.exception.ValidatorException;
 import com.revature.model.User;
 
-import sun.security.validator.ValidatorException;
 
 public class UserValidator {
 public static void validateBeforeRegistration(User user) throws ValidatorException {
@@ -41,25 +41,25 @@ public static void passwordValidation(String userName, String password) throws E
                 throw new ValidatorException("Password should contain atleast one special character");
         }
 }
-public static void validPhone_number(String phone_number) throws Exception
+public static void validPhoneNumber(String phoneNumber) throws Exception
 {
-	if(phone_number.length() < 10 || phone_number.length() > 10)
+	if(phoneNumber.length() < 10 || phoneNumber.length() > 10)
 	{
 		throw new ValidatorException("Invalid phone number");
 		
 	}
 	 String upperCaseChars = "(.*[A-Z].*)";
-     if (phone_number.matches(upperCaseChars ))
+     if (phoneNumber.matches(upperCaseChars ))
      {
              throw new ValidatorException("phone_number should not contain alphabet");
      }
      String lowerCaseChars = "(.*[a-z].*)";
-     if (phone_number.matches(lowerCaseChars ))
+     if (phoneNumber.matches(lowerCaseChars ))
      {
              throw new ValidatorException("phone_number should not contain alphabet");
      }
      String specialChars = "(.*[,~,!,@,#,$,%,^,&,,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)";
-     if (phone_number.matches(specialChars ))
+     if (phoneNumber.matches(specialChars ))
      {
              throw new ValidatorException("phone_number should notcontain special character");
      }

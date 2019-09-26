@@ -13,7 +13,7 @@ public class TestUserDAO {
 	@Test
 public  void testValidLogin()
 {
-	UserDAOImp udao=new UserDAO();
+	UserDAO udao=new UserDAOImp();
 	String name="janshi";
 	String password="janu";
 	User user=null;
@@ -21,7 +21,6 @@ public  void testValidLogin()
 		try {
 			user=udao.login( name, password);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	
@@ -33,7 +32,7 @@ public void testInValidLogin() {
 
 	String email = "";
 	String password = "";
-	UserDAO userDAO = new UserDAO();
+	UserDAO userDAO = new UserDAOImp();
 	User user = null;
 	
 		try {

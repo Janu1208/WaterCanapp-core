@@ -15,12 +15,12 @@ public class Reserve {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	private  Integer ReserveCans;
+	private  Integer reserveCans;
     public Integer getReserveCans() {
-		return ReserveCans;
+		return reserveCans;
 	}
 	public void setReserveCans(Integer reserveCans) {
-		ReserveCans = reserveCans;
+		reserveCans = reserveCans;
 	}
 	private String status;
 

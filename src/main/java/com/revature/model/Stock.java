@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public class Stock{
 	
-	private  Integer cans_avail;
+	private  Integer cansAvail;
 	private LocalDate date;
 	
 	
@@ -22,12 +22,12 @@ public class Stock{
 		this.date = date;
 	}
 
-	public  Integer getCans_avail() {
-		return cans_avail;
+	public  Integer getCansAvail() {
+		return cansAvail;
 	}
 	
 	public int setCans_avail(Integer cans_avail) {
-		return this.cans_avail = cans_avail;
+		return this.cansAvail = cans_avail;
 	}
 	
 	

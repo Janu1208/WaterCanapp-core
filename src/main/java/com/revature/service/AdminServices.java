@@ -24,14 +24,14 @@ public class AdminServices {
  * if u try to login with name and password that is not registered you will get invalid login
  * @throws Exception
  */
-	public Admin login(String name,String password) throws Exception
+	public Admin login(String Name,String Password) throws Exception
 	{
 		Admin admin=null;
 	     try {
-	    	 admin=adao.login(name,password);
+	    	 admin=adao.login(Name,Password);
 	    	 if(admin==null)
 	    	 {
-	    		 throw new Exception(ErrorConstants.Login);
+	    		 throw new Exception(ErrorConstants.LOGIN);
 
 	    	 }
 		} catch (DBException e) {
@@ -65,8 +65,9 @@ public class AdminServices {
 	 * value should not be null
 	 * value should be greater than zero
 	 * @param addCans
+	 * @throws SQLException 
 	 */
-	public void setAvailableCans(int addCans) 
+	public void setAvailableCans(int addCans) throws SQLException 
 	{
 		int update;
 		StockDAO dao = new StockDAOImp();
@@ -78,8 +79,6 @@ public class AdminServices {
 } catch (SQLException e) {
 	e.printStackTrace();
 }
-		
-
-		
+				
 	}
 }

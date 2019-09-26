@@ -11,7 +11,7 @@ import com.revature.util.ErrorConstants;
 
 public class OrderDAOImp implements OrderDAO
 {
-	public  void addOrder(Order order)
+	public  void addOrder(Order order) throws SQLException
 	{
 	Connection con = ConnectionUtil.getConnection();
 	String sql="insert into order_det(user_id,order_cans) values(?,?)";
@@ -24,13 +24,13 @@ public class OrderDAOImp implements OrderDAO
 		pst.executeUpdate();
 	} catch (SQLException e) {
 		e.printStackTrace();
-		throw new RuntimeException(ErrorConstants.orderCans);
+		throw new RuntimeException(ErrorConstants.ORDERCANS);
 	}
 	finally {
 		ConnectionUtil.close(con, pst);
 	}
 	}
-public void addReserveOrder(User user,int order_cans) throws Exception {
+public void addReserveOrder(User user,int orderCans) throws Exception {
 		
 		Connection con =null;
 		PreparedStatement pst = null;
@@ -40,12 +40,12 @@ public void addReserveOrder(User user,int order_cans) throws Exception {
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setInt(1, user.getId());
-			pst.setInt(2, User.getReserve_id());
-			pst.setInt(3,order_cans);
+			pst.setInt(2, User.getReserveId());
+			pst.setInt(3,orderCans);
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new Exception(ErrorConstants.orderReservedCans,e);
+			throw new Exception(ErrorConstants.ORDERRESERVEDCANS,e);
 		}
 		finally {
 			ConnectionUtil.close(con, pst);

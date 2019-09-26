@@ -12,7 +12,7 @@ import com.revature.model.Stock;
 import com.revature.util.ConnectionUtil;
 
 public class StockDAOImp implements StockDAO {
-public  int findavaiability(){
+public  int findavaiability() throws SQLException{
 	int availableStock = 0;
 		Connection con = ConnectionUtil.getConnection();
 		String sql = "select * from stock";
@@ -86,7 +86,7 @@ public List<Stock> viewStock() throws Exception{
 			}
 	 }
 	 
-	 public void updateStock(int cans) throws SQLException {
+	 public void updateStock(int cansAvail) throws SQLException {
 			
 			Connection con = ConnectionUtil.getConnection();
 			String sql = "update stock set cans_avail=? , date =current_timestamp()";
@@ -94,7 +94,7 @@ public List<Stock> viewStock() throws Exception{
 			
 			try {
 				pst = con.prepareStatement(sql);
-				pst.setInt(1,cans);
+				pst.setInt(1,cansAvail);
 				int rows = pst.executeUpdate();
 				System.out.println("Rows Updated:" + rows);
 			} catch (SQLException e) {

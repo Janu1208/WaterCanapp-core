@@ -24,7 +24,7 @@ public void register(User user) throws Exception
 		UserValidator.validateBeforeRegistration(user);
 		UserValidator.validName(user.getName());
 		UserValidator.passwordValidation(user.getName(),user.getPassword());
-		UserValidator.validPhone_number(user.getPhone_number());
+		UserValidator.validPhoneNumber(user.getPhoneNumber());
 		try {
 			udao.register(user);
 		} catch (DBException e) {
@@ -44,7 +44,7 @@ public User login(String phone_number,String password) throws Exception
      try {
     	 user=udao.login(phone_number,password);
     	 if (user== null) {
-    		 throw new Exception(ErrorConstants.Login);
+    		 throw new Exception(ErrorConstants.LOGIN);
     	 }
 	} catch (DBException e) {
 		e.printStackTrace();

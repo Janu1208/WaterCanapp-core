@@ -8,11 +8,7 @@ import java.sql.SQLException;
 
 import com.revature.model.User;
 import com.revature.util.ConnectionUtil;
-
-
-
 public class UserDAOImp implements UserDAO{
-	public static int id;
 	static User user=new User();
 	 public void register(User user) throws Exception
 	 {
@@ -25,7 +21,7 @@ public class UserDAOImp implements UserDAO{
 	   con = ConnectionUtil.getConnection();
 	   pst = con.prepareStatement(sql);
 	   pst.setString(1, user.getName());
-	   pst.setString(2, user.getPhone_number());
+	   pst.setString(2, user.getPhoneNumber());
 	   pst.setString(3, user.getPassword());
 	   
 	   int rows = pst.executeUpdate();
@@ -36,7 +32,7 @@ public class UserDAOImp implements UserDAO{
 	  }
 	 }
 	 
-	 public User login(String phone_number, String setPassword) throws Exception  {
+	 public User login(String phoneNumber, String setPassword) throws Exception  {
 			Connection con = null;
 			PreparedStatement pst = null;
 			ResultSet rs = null;
@@ -46,14 +42,13 @@ public class UserDAOImp implements UserDAO{
 				con = ConnectionUtil.getConnection();
 				String sql = "select * from User_det where MobileNumber = ? and password = ?";
 				pst = con.prepareStatement(sql);
-				pst.setString(1, phone_number);
+				pst.setString(1, phoneNumber);
 				pst.setString(2, setPassword);
 				rs = pst.executeQuery();
 				if(rs.next()) {
 					user = new User();
 					user.setId(rs.getInt("ID"));
 					user.setName(rs.getString("Name"));
-					user.setPhone_number(rs.getString("MobileNumber"));
 					user.setPassword(rs.getString("password"));
 					
 				}
@@ -67,12 +62,11 @@ public class UserDAOImp implements UserDAO{
 }
 	 
 	 
-	 public  User getUserID(String name) {
+	 public  User getUserID(String name) throws SQLException {
 
 			Connection con = ConnectionUtil.getConnection();
 			String sql = "select * from User_det where Name=?";
 			PreparedStatement pst;
-			id = 0;
 			User user=null;
 			try {
 				pst = con.prepareStatement(sql);
@@ -83,7 +77,7 @@ public class UserDAOImp implements UserDAO{
 					user = new User();
 					user.setId(rs.getInt("ID"));
 					user.setName(rs.getString("Name"));
-					user.setPhone_number(rs.getString("MobileNumber"));
+					user.setPhoneNumber(rs.getString("MobileNumber"));
 					user.setPassword(rs.getString("password"));
 					
 					

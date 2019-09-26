@@ -15,11 +15,12 @@ public class ReserveServices {
 	 * it will give facility for the user to reserve cans
 	 * reserved cans should be greater than zero and it should not be null
 	 * @param reserve
+	 * @throws  
 	 */
-	public void reserveCan( Reserve reserve) {
+	public void reserveCan( Reserve reserve) throws SQLException {
 		StockDAO sdao =new StockDAOImp();
 		int availableStock = sdao.findavaiability();
-		logger.info("Available"+availableStock + ",reserveCan:"+reserve.getReserveCans());
+		logger.info("Available"+availableStock + ",reserveCans:"+reserve.getReserveCans());
 		int totalCanAfterReserve=0;
 		if (reserve.getReserveCans() <= availableStock) {
 			ReserveDAO rdao=new ReserveDAOImp();

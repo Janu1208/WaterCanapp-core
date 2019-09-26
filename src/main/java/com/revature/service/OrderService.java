@@ -16,22 +16,24 @@ public class OrderService {
 	 * it will give facility for the user to add cans
 	 * ordered cans should be greater than zero and it should not be null
 	 * @param order
+	 * @throws  
 	 */
-	public void orderCan( Order order) {
+	public void orderCan( Order order) throws SQLException {
 
 		StockDAO sdao =new StockDAOImp();
 		int availableStock = sdao.findavaiability();
-		logger.info("Available"+availableStock + ",orderCan:"+order.getOrderCans());
+		logger.info("Available"+availableStock + ",orderCans:"+order.getOrderCans());
 		int totalCanAfterOrder=0;
 		if (order.getOrderCans() <= availableStock) {
 			OrderDAO odao=new OrderDAOImp();
 			odao.addOrder(order);
 			totalCanAfterOrder=availableStock - order.getOrderCans();
 			try {
+				
 				sdao.updateStock(totalCanAfterOrder);
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
+			} 
 		}
 	}
 }
