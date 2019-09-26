@@ -13,7 +13,7 @@ public class TestMobileNumberValidation {
 	public void test() {
 		String phone_number="755012299698";
 		try {
-			UserValidator.validPhone_number(phone_number);
+			UserValidator.validPhoneNumber(phone_number);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
