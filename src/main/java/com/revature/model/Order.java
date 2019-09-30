@@ -2,7 +2,7 @@ package com.revature.model;
 
 public class Order {
 	private int userId;
-
+    
 	
 	public int getUserId() {
 		return userId;

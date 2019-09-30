@@ -22,9 +22,9 @@ public void register(User user) throws Exception
 {
 	try {
 		UserValidator.validateBeforeRegistration(user);
-		UserValidator.validName(user.getName());
+		/*UserValidator.validName(user.getName());
 		UserValidator.passwordValidation(user.getName(),user.getPassword());
-		UserValidator.validPhoneNumber(user.getPhoneNumber());
+		UserValidator.validPhoneNumber(user.getPhoneNumber());*/
 		try {
 			udao.register(user);
 		} catch (DBException e) {
@@ -37,12 +37,12 @@ public void register(User user) throws Exception
 	}
 	
 }
-public User login(String phone_number,String password) throws Exception 
+public User login(String phoneNumber,String password) throws Exception 
 {
 	User user=null;
 	
      try {
-    	 user=udao.login(phone_number,password);
+    	 user=udao.login(phoneNumber,password);
     	 if (user== null) {
     		 throw new Exception(ErrorConstants.LOGIN);
     	 }

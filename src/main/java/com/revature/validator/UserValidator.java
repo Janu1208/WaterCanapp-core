@@ -43,7 +43,7 @@ public static void passwordValidation(String userName, String password) throws E
 }
 public static void validPhoneNumber(String phoneNumber) throws Exception
 {
-	if(phoneNumber.length() < 10 || phoneNumber.length() > 10)
+	if(phoneNumber.length() < 10 || phoneNumber.length() > 10 || phoneNumber.length()<0)
 	{
 		throw new ValidatorException("Invalid phone number");
 		
@@ -53,7 +53,7 @@ public static void validPhoneNumber(String phoneNumber) throws Exception
      {
              throw new ValidatorException("phone_number should not contain alphabet");
      }
-     String lowerCaseChars = "(.*[a-z].*)";
+     String lowerCaseChars = "(.*[a-z] .*)";
      if (phoneNumber.matches(lowerCaseChars ))
      {
              throw new ValidatorException("phone_number should not contain alphabet");
@@ -61,7 +61,7 @@ public static void validPhoneNumber(String phoneNumber) throws Exception
      String specialChars = "(.*[,~,!,@,#,$,%,^,&,,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)";
      if (phoneNumber.matches(specialChars ))
      {
-             throw new ValidatorException("phone_number should notcontain special character");
+             throw new ValidatorException("phone number should notcontain special character");
      }
 }
 public static void validName(String name) throws Exception

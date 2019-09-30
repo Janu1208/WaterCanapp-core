@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.revature.model.Reserve;
+import com.revature.model.Stock;
 import com.revature.model.User;
 import com.revature.util.ConnectionUtil;
 
@@ -31,7 +32,7 @@ public class ReserveDAOImp implements ReserveDAO{
 		}
   }
   
-	public void updateReserveCans(User user,int reserve_cans) throws SQLException
+	public void updateReserveCans(User user,int reserveCans) throws SQLException
 	{
 		Connection con = ConnectionUtil.getConnection();
 		String sql="update reserve set reserve_cans=? where user_id=?";
@@ -39,7 +40,7 @@ public class ReserveDAOImp implements ReserveDAO{
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setInt(1,user.getId());
-			pst.setInt(2, reserve_cans);
+			pst.setInt(2, reserveCans);
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			
@@ -51,23 +52,22 @@ public class ReserveDAOImp implements ReserveDAO{
 		
 	}
 	
-	public User selectReserve(int reserve_id) throws SQLException
+	public Reserve selectReserve(int userId) throws SQLException
 	{
 		Connection con = ConnectionUtil.getConnection();
-        String sql="select *from reserve  where reserve_id=? and status='Reserved'";
+        String sql="select *from reserve  where user_id=? and status='Reserved', date =current_timestamp()";
         PreparedStatement pst = null;
-        User user=null;
+        Reserve reserve=new Reserve();
         try {
 			pst = con.prepareStatement(sql);
-			pst.setInt(1,reserve_id);
+			pst.setInt(1,userId);
 			ResultSet rs = pst.executeQuery();
 		
 			if(rs.next()) {
-			    user = new User();
-				user.setId(rs.getInt("user_id"));
-				user.setReserveId(rs.getInt("reserve_id"));
-				user.setCansAvail(rs.getInt("reserve_cans"));
-				user.setStatus(rs.getString("status"));
+				reserve.setUserId(rs.getInt("userId"));
+				reserve.setReserveId(rs.getInt("reserveId"));
+				reserve.setReserveCans(rs.getInt("reserveCans"));
+				reserve.setStatus(rs.getString("status"));
 				
 			}
 		} catch (SQLException e) {
@@ -77,19 +77,20 @@ public class ReserveDAOImp implements ReserveDAO{
         finally {
 			ConnectionUtil.close(con, pst);
 		}
-		return user;
+		return reserve;
 	}
 	
-   public void updateStatus(User user,int reserve_cans) throws SQLException
+   public void updateStatus(User user,int reserveCans) throws SQLException
    {
 	   Connection con =null;
 	    PreparedStatement pst = null;
+	    Reserve reserve=new Reserve();
 		con = ConnectionUtil.getConnection();
 		String sql = "update reserve set status ='Ordered',reserve_cans=? where reserve_id= ?";
 		try {
 			pst = con.prepareStatement(sql);
-			pst.setInt(1,reserve_cans);
-			pst.setInt(2,User.getReserveId());
+			pst.setInt(1,reserveCans);
+			pst.setInt(2,reserve.getReserveId());
 			
 			pst.executeUpdate();
 		} catch (SQLException e) {
@@ -106,6 +107,8 @@ public class ReserveDAOImp implements ReserveDAO{
 		
 		Connection con =null;
 		PreparedStatement pst = null;
+		Reserve reserve=new Reserve();
+		Stock stock=new Stock();
 	    con = ConnectionUtil.getConnection();
 		String sql = "select * from reserve where User_id=? and status='Order Pending' ";
 		User user=null;
@@ -116,10 +119,9 @@ public class ReserveDAOImp implements ReserveDAO{
 		
 			if(rs.next()) {
 			    user = new User();
-				user.setReserveId(rs.getInt("reserve_id"));
-				user.setName(rs.getString("User_name"));
-				user.setId(rs.getInt("user_id"));
-				user.setCansAvail(rs.getInt("reserve_cans"));
+				reserve.setReserveId(rs.getInt("reserveId"));
+				user.setId(rs.getInt("userId"));
+				stock.setCansAvail(rs.getInt("reserveCans"));
 			
 				
 			}

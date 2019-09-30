@@ -1,7 +1,18 @@
 package com.revature.model;
 
+import java.time.LocalDate;
+
 public class Reserve {
 	private int userId;
+	private static int reserveId;
+	private LocalDate date;
+
+	public int getReserveId() {
+		return reserveId;
+	}
+	public void setReserveId(int reserveId) {
+		Reserve.reserveId = reserveId;
+	}
 	public int getUserId() {
 		return userId;
 	}
@@ -20,7 +31,7 @@ public class Reserve {
 		return reserveCans;
 	}
 	public void setReserveCans(Integer reserveCans) {
-		reserveCans = reserveCans;
+		this.reserveCans = reserveCans;
 	}
 	private String status;
 

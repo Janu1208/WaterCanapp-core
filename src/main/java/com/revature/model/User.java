@@ -30,28 +30,9 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public static int getCansAvail() {
-		return cansAvail;
-	}
-	public static void setCansAvail(int cansAvail) {
-		User.cansAvail = cansAvail;
-	}
-	public static int getReserveId() {
-		return reserveId;
-	}
-	public static void setReserveId(int reserveId) {
-		User.reserveId = reserveId;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
+
 	private String password;
-	private static int cansAvail;
-	private static int reserveId;
-	private String status;
+	
 	
 	
 	

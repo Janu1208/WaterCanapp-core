@@ -17,20 +17,33 @@ public class ReserveServices {
 	 * @param reserve
 	 * @throws  
 	 */
-	public void reserveCan( Reserve reserve) throws SQLException {
+	public Reserve reserveCan( Reserve reserve) throws SQLException {
 		StockDAO sdao =new StockDAOImp();
 		int availableStock = sdao.findavaiability();
 		logger.info("Available"+availableStock + ",reserveCans:"+reserve.getReserveCans());
 		int totalCanAfterReserve=0;
-		if (reserve.getReserveCans() <= availableStock) {
-			ReserveDAO rdao=new ReserveDAOImp();
-			rdao.addReserveCans(reserve);
-			totalCanAfterReserve=availableStock - reserve.getReserveCans();
-			try {
-				sdao.updateStock(totalCanAfterReserve);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		 ReserveDAO rdao=new ReserveDAOImp();
+			
+			
+				if (reserve.getReserveCans() <= availableStock) {
+					rdao.addReserveCans(reserve);
+					try {
+						totalCanAfterReserve=availableStock - reserve.getReserveCans();
+						sdao.updateStock(totalCanAfterReserve);
+						reserve=rdao.selectReserve(reserve.getUserId());
+					
+					} catch (SQLException e) {
+						e.printStackTrace();
+						throw new SQLException(e.getMessage());
+					}
+			
+			
+		}
+		else
+		{
+			reserve=null;
+		}
+				return reserve;
+			
 		}
 	}
-}

@@ -26,9 +26,10 @@ public class Stock{
 		return cansAvail;
 	}
 	
-	public int setCans_avail(Integer cans_avail) {
-		return this.cansAvail = cans_avail;
+	public int setCansAvail(Integer cansAvail) {
+		return this.cansAvail = cansAvail;
 	}
+
 	
 	
 

@@ -1,20 +1,17 @@
 package com.revature.util;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Properties;
 public class ConnectionUtil {
 	  private static final ConnectionUtil INSTANCE = new ConnectionUtil();
 	    private static final Logger logger = Logger.getInstance();
-	    private static final String driverClassName = "com.mysql.cj.jdbc.Driver";
-	    private static final String url = "jdbc:mysql://trainingdb.ck1ayq0lncmp.ap-south-1.rds.amazonaws.com:3306/jhansi_db";
-	    private static final String username = "jhansi";
-	    private static final String password = "jhansi";
+	    private static final String driverClassName = "com.mysql.jdbc.Driver";
+	    private static final String url = "jdbc:mysql://localhost:3306/watercane";
+	    private static final String username = "root";
+	    private static final String password = "root";
 	    public static ConnectionUtil getInstance() {
 	        return INSTANCE;
 	    }

@@ -49,7 +49,7 @@ public List<Stock> viewStock() throws Exception{
 		while(rs.next()) {
 			
 			Stock stock = new Stock();
-			stock.setCans_avail(rs.getInt("cans_avail"));
+			stock.setCansAvail(rs.getInt("cans_avail"));
 			Date date = rs.getDate("date");
 			stock.setDate(date.toLocalDate());
 			list.add(stock);
@@ -64,7 +64,7 @@ public List<Stock> viewStock() throws Exception{
 	
 	return list;
 }
-	 public void  availStock(int cans) throws Exception
+	 public void  availStock(int cansAvail) throws Exception
 	 {
 		 Connection con=null;
 		  PreparedStatement pst = null;
@@ -73,7 +73,7 @@ public List<Stock> viewStock() throws Exception{
 		  try {
 		   con = ConnectionUtil.getConnection();
 		   pst = con.prepareStatement(sql);
-		   pst.setInt(1, cans);
+		   pst.setInt(1, cansAvail);
 		  
 		   int  rows= pst.executeUpdate();
 		   System.out.println("No of rows inserted:" + rows);

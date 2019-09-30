@@ -45,7 +45,7 @@ public class AdminServices {
 	/**
 	 * to show the updated stock
 	 * @return
-	 * @throws Exception
+	 * @throws 
 	 */
 	public List<Stock> stockView() throws Exception {
 
