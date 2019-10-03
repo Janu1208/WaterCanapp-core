@@ -23,8 +23,6 @@ public class ReserveServices {
 		logger.info("Available"+availableStock + ",reserveCans:"+reserve.getReserveCans());
 		int totalCanAfterReserve=0;
 		 ReserveDAO rdao=new ReserveDAOImp();
-			
-			
 				if (reserve.getReserveCans() <= availableStock) {
 					rdao.addReserveCans(reserve);
 					try {

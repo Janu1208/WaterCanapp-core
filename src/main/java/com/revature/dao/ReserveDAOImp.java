@@ -80,11 +80,11 @@ public class ReserveDAOImp implements ReserveDAO{
 		return reserve;
 	}
 	
-   public void updateStatus(User user,int reserveCans) throws SQLException
+   public void updateStatus(Reserve reserve,int reserveCans) throws SQLException
    {
 	   Connection con =null;
 	    PreparedStatement pst = null;
-	    Reserve reserve=new Reserve();
+	     reserve=new Reserve();
 		con = ConnectionUtil.getConnection();
 		String sql = "update reserve set status ='Ordered',reserve_cans=? where reserve_id= ?";
 		try {
